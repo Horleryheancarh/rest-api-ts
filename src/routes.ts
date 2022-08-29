@@ -1,6 +1,6 @@
 import { Express, Request, Response } from "express";
 import { createUserHandler } from "./controller/user.controller";
-import { createUserSessionHandler, getUserSessionsHandler } from "./controller/session.controller";
+import { createUserSessionHandler, getUserSessionsHandler, deleteSessionHandler } from "./controller/session.controller";
 import validateRequest from "./middlewares/validateRequest";
 import { createUserSchema } from "./schemas/user.schema";
 import { createSessionSchema } from "./schemas/session.schema";
@@ -14,4 +14,5 @@ export default (app: Express) => {
 	// Sessions
 	app.post("/api/session", validateRequest(createSessionSchema), createUserSessionHandler);
 	app.get("/api/sessions", requireUser, getUserSessionsHandler);
+	app.delete("/api/sessions", requireUser, deleteSessionHandler);
 }
