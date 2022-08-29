@@ -4,6 +4,7 @@ import { createUserSessionHandler, getUserSessionsHandler } from "./controller/s
 import validateRequest from "./middlewares/validateRequest";
 import { createUserSchema } from "./schemas/user.schema";
 import { createSessionSchema } from "./schemas/session.schema";
+import requireUser from "./middlewares/requireUser";
 
 export default (app: Express) => {
 	app.get("/healthcheck", (req: Request, res: Response) => res.sendStatus(200));
@@ -12,5 +13,5 @@ export default (app: Express) => {
 	app.post("/api/user", validateRequest(createUserSchema), createUserHandler)
 	// Sessions
 	app.post("/api/session", validateRequest(createSessionSchema), createUserSessionHandler);
-	app.get("/api/sessions", getUserSessionsHandler);
+	app.get("/api/sessions", requireUser, getUserSessionsHandler);
 }
