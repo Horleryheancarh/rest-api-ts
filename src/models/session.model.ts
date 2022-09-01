@@ -9,7 +9,7 @@ export interface SessionDocument extends mongoose.Document {
 	updatedAt: Date;
 }
 
-const SessionSchema = new mongoose.Schema(
+const sessionSchema = new mongoose.Schema(
 	{
 		user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 		valid: { type: Boolean, default: true },
@@ -18,6 +18,6 @@ const SessionSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-const User = mongoose.model<SessionDocument>("Session", SessionSchema);
+const Session = mongoose.model<SessionDocument>("Session", sessionSchema);
 
-export default User;
+export default Session;
